@@ -1,0 +1,17 @@
+Create Index:
+
+PUT /customer/
+{
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "mappings" : {
+        "_doc" : {
+            "properties" : {
+                "ids" : { "type" : "text" },
+                "name": {"type" : "text"},
+				"age" : { "type" : "integer"}
+            }
+        }
+    }
+}
