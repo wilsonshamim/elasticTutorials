@@ -15,3 +15,15 @@ PUT /customer/
         }
     }
 }
+
+delete index:
+DELETE /customer
+
+insert data into index:
+
+POST /customer/_doc/1
+{
+"ids":"1",
+"name" : "shamim",
+"Age":20
+}
