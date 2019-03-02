@@ -1,0 +1,13 @@
+
+Installing on windows:
+you can go to the download page https://www.elastic.co/downloads and download elastic, kibana and other products
+unzip the folder. I have downloaded elasticsearch-6.6.1
+
+navigate to bin folder and click on elasticsearch.bat
+after succesfully started, you can enter http://localhost:9200
+
+this will dislay the status of your elastic cluster.
+
+you can change the name of cluster, nodes port and all other details in config\elasticsearch.yml
+
+
