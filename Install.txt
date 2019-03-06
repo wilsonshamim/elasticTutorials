@@ -23,3 +23,10 @@ It also provides dev tool for connecting to elastic and perform operations like 
 
 you can change the name of cluster, nodes port and all other details in config\kibana.yml
 
+
+
+------------------------------
+
+we can install elastic using docker
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+
