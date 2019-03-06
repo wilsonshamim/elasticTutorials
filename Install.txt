@@ -30,6 +30,9 @@ you can change the name of cluster, nodes port and all other details in config\k
 we can install elastic using docker
 docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.6.1
 
-start Kibana:
+start Kibana using docker
 
 docker run --net=host -e "ELASTICSEARCH_URL=http://localhost:9200" docker.elastic.co/kibana/kibana:6.6.1
+
+
+-------
