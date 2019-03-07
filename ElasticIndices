@@ -72,7 +72,7 @@ POST /customer/_doc?pretty
 }
 
 
-To Update an index:
+To Update an index document:
 
 POST /customer/_doc/1/_update?pretty
 {
@@ -86,3 +86,8 @@ POST /customer/_doc/1/_update?pretty
   "script" : "ctx._source.age += 5"
 }
 In the above example, ctx._source refers to the current source document that is about to be updated.
+
+Delete Document:
+Deleting a document is fairly straightforward
+DELETE /customer/_doc/2?pretty
+
