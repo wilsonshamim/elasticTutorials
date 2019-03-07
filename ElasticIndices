@@ -55,18 +55,34 @@ DELETE /customer?pretty
 
 To replace an index document:
 
-PUT /customer/_doc/1?pretty
+POST /customer/_doc/1?pretty
 {
   "name": "one Doe"
 }
 
-you see if we have used the same document id = 1, the data will be updated/replaced.
+you see if we have used the same document id = 1, the data will be replaced.
 
 
 if we dont provide the document id, elastic will automatically generate the id.
 
 
-PUT /customer/_doc?pretty
+POST /customer/_doc?pretty
 {
   "name": "one Doe"
 }
+
+
+To Update an index:
+
+POST /customer/_doc/1/_update?pretty
+{
+  "doc": { "name": "Jane Doe", "age": 20 }
+}
+
+Updates can also be performed by using simple scripts. This example uses a script to increment the age by 5:
+
+POST /customer/_doc/1/_update?pretty
+{
+  "script" : "ctx._source.age += 5"
+}
+In the above example, ctx._source refers to the current source document that is about to be updated.
