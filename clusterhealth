@@ -1,0 +1,26 @@
+Let’s start with a basic health check, which we can use to see how our cluster is doing.
+To check the cluster health, we will be using the _cat API
+
+GET /_cat/health?v
+
+the output will be 
+epoch      timestamp cluster       status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
+1551967830 14:10:30  elasticsearch yellow          1         1      9   9    0    0        8             0                  -                 52.9%
+
+
+Whenever we ask for the cluster health, we either get green, yellow, or red.
+
+Green - everything is good (cluster is fully functional)
+Yellow - all data is available but some replicas are not yet allocated (cluster is fully functional)
+Red - some data is not available for whatever reason (cluster is partially functional)
+
+Note: When a cluster is red, it will continue to serve search requests from the available shards but you will likely need to fix it ASAP since there are unassigned shards.
+
+
+To see the nodes health:
+
+GET /_cat/nodes?v
+
+ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
+127.0.0.1           21          81  19                          mdi       *      z8uVnlA
+
