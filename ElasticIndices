@@ -51,3 +51,22 @@ GET /customer/_doc/1?pretty
 
 Delete an index:
 DELETE /customer?pretty
+
+
+To replace an index document:
+
+PUT /customer/_doc/1?pretty
+{
+  "name": "one Doe"
+}
+
+you see if we have used the same document id = 1, the data will be updated/replaced.
+
+
+if we dont provide the document id, elastic will automatically generate the id.
+
+
+PUT /customer/_doc?pretty
+{
+  "name": "one Doe"
+}
