@@ -35,6 +35,7 @@ GET /bank1/_search?q=name:john
 GET /bank1/_search?q=_id:2
 - Where _id is the filed
 
+
 GET /bank1/_search?q=*
 
 
