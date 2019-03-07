@@ -1,0 +1,53 @@
+http://localhost:9200/_cat/indices?v
+
+Now let’s take a peek at our indices:
+
+GET /_cat/indices?v
+And the response:
+
+health status index uuid pri rep docs.count docs.deleted store.size pri.store.size
+Which simply means we have no indices yet in the cluster.
+
+health status index                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   customers                       F-3G8aCiRG-enzawnpa5PQ   5   1          5            0     19.8kb         19.8kb
+green  open   .kibana_1                       4GY1i_pOTfuoh_tt64b9GA   1   0        341            9    709.1kb        709.1kb
+yellow open   metricbeat-6.6.1-2019.02.26     Nxom2qylSPmvk3TtgKgi8w   1   1       1099            0    465.7kb        465.7kb
+yellow open   customer                        CYATcTSHS0m0ztZTNleV-g   1   1          0            0       261b           261b
+yellow open   apm-6.6.1-onboarding-2019.02.26 G5_GVA4XSJu3Y4Dz5WMP4Q   1   1          1            0      5.9kb          5.9kb
+
+Create an Index
+Now let’s create an index named "customer" and then list all the indexes again:
+
+PUT /customer?pretty
+GET /_cat/indices?v
+ 
+The first command creates the index named "customer" using the PUT verb. We simply append pretty to the end of the call to tell it to pretty-print the JSON response (if any).
+
+And the response:
+
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   customer 95SQ4TSUT7mWBT7VNHH67A   5   1          0            0       260b           260b
+
+The results of the second command tells us that we now have 1 index named customer and it has 5 primary shards and 1 replica (the defaults) and it contains 0 documents in it.
+
+You might also notice that the customer index has a yellow health tagged to it. Recall from our previous discussion that yellow means that some replicas are not (yet) allocated. The reason this happens for this index is because Elasticsearch by default created one replica for this index. Since we only have one node running at the moment, that one replica cannot yet be allocated (for high availability) until a later point in time when another node joins the cluster. Once that replica gets allocated onto a second node, 
+the health status for this index will turn to green.
+
+------------------------
+
+create an index:
+PUT /customer?pretty
+
+add Data into index:
+
+PUT /customer/_doc/1?pretty
+{
+  "name": "John Doe"
+}
+
+
+get data from index:
+GET /customer/_doc/1?pretty
+
+Delete an index:
+DELETE /customer?pretty
