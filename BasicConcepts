@@ -40,3 +40,12 @@ To summarize, each index can be split into multiple shards. An index can also be
 The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may also change the number of replicas dynamically anytime. You can change the number of shards for an existing index using the _shrink and _split APIs, however this is not a trivial task and pre-planning for the correct number of shards is the optimal approach.
 
 By default, each index in Elasticsearch is allocated 5 primary shards and 1 replica which means that if you have at least two nodes in your cluster, your index will have 5 primary shards and another 5 replica shards (1 complete replica) for a total of 10 shards per index.
+
+
+The REST APIedit
+Now that we have our node (and cluster) up and running, the next step is to understand how to communicate with it. Fortunately, Elasticsearch provides a very comprehensive and powerful REST API that you can use to interact with your cluster. Among the few things that can be done with the API are as follows:
+
+Check your cluster, node, and index health, status, and statistics
+Administer your cluster, node, and index data and metadata
+Perform CRUD (Create, Read, Update, and Delete) and search operations against your indexes
+Execute advanced search operations such as paging, sorting, filtering, scripting, aggregations, and many others
