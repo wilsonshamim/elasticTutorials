@@ -1,0 +1,13 @@
+split log message
+
+filter {
+    grok {
+        match => { "message" => "%{TIMESTAMP_ISO8601:timestamp}\s+%{NOTSPACE:username}\s+%{NOTSPACE:pipelinename}*" }
+    }
+
+}
+
+
+start logstash with conf file
+
+./logstash -f /elastic/logstash-7.6.2/config/logstash_mysql.conf
