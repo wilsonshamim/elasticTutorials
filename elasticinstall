@@ -1,0 +1,3 @@
+start elastic in background
+
+./bin/elasticsearch -d -p pid
