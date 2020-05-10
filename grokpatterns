@@ -13,6 +13,12 @@ filter {
         match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} \[user\:\*%{USERNAME:user}\] \[pipeline\:%{WORD:pipelinename}\/%{NOTSPACE:pipelineID}\] %{GREEDYDATA:thread} %{LOGLEVEL:log-level} %{GREEDYDATA:messages}"}
     }
 
+you can also simulate your grok pattern using DEV tool in kibana:
+1. go to "DEV TOOL"
+2. click on "GROK DEBUGER"
+3. enter the sample data
+4. enter grok pattern
+5. click simulate.
 
 general grok pattern:
 USER: %{USERNAME}
