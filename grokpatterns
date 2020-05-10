@@ -1,0 +1,51 @@
+say I have below sample input message which I want to split to display in kibana.
+
+2020-05-09 17:31:08,497 [user:*user1] [pipeline:mypipelinename/pipelineid23e332-23cc-4e2e-b155-6dab74c2c1f0] [runner:] 
+[thread:Amazon S3 Runner - 0] [stage:] DEBUG PoolingHttpClientConnectionManager - Connection leased: [id: 1234][route: somemessage ...... 1 of 50; total allocated: 1 of 50]
+
+use below grok pattern:
+%{TIMESTAMP_ISO8601:timestamp} \[user\:\*%{USERNAME:user}\] \[pipeline\:%{WORD:pipelinename}\/%{NOTSPACE:pipelineID}\] %{GREEDYDATA:thread}
+%{LOGLEVEL:log-level} %{GREEDYDATA:messages}
+
+general grok pattern:
+USER: %{USERNAME}
+USERNAME: [a-zA-Z0-9._-]+
+BASE10NUM: (?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))
+BASE16FLOAT: \b(?<![0-9A-Fa-f.])(?:[+-]?(?:0x)?(?:(?:[0-9A-Fa-f]+(?:\.[0-9A-Fa-f]*)?)|(?:\.[0-9A-Fa-f]+)))\b
+INT: (?:[+-]?(?:[0-9]+))
+NONNEGINT: \b(?:[0-9]+)\b
+NUMBER: (?:%{BASE10NUM}) BASE16NUM (?<![0-9A-Fa-f])(?:[+-]?(?:0x)?(?:[0-9A-Fa-f]+))
+POSINT: \b(?:[1-9][0-9]*)\b
+WORD: \b\w+\b
+NOTSPACE: \S+
+SPACE: \s*
+DATA: .*?
+GREEDYDATA: .*
+QUOTEDSTRING: (?>(?<!\\)(?>"(?>\\.|[^\\"]+)+"|""|(?>'(?>\\.|[^\\']+)+')|''|(?>`(?>\\.|[^\\`]+)+`)|``))
+UUID: [A-Fa-f0-9]{8}-(?:[A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}
+
+# Networking
+MAC (?:%{CISCOMAC}|%{WINDOWSMAC}|%{COMMONMAC})
+CISCOMAC (?:(?:[A-Fa-f0-9]{4}\.){2}[A-Fa-f0-9]{4})
+WINDOWSMAC (?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})
+COMMONMAC (?:(?:[A-Fa-f0-9]{2}:){5}[A-Fa-f0-9]{2})
+
+# paths
+PATH (?:%{UNIXPATH}|%{WINPATH})
+UNIXPATH (/([\w_%!$@:.,+~-]+|\\.)*)+
+TTY (?:/dev/(pts|tty([pq])?)(\w+)?/?(?:[0-9]+))
+URIHOST %{IPORHOST}(?::%{POSINT:port})?
+# uripath comes loosely from RFC1738, but mostly from what Firefox
+# doesn't turn into %XX
+URIPATH (?:/[A-Za-z0-9$.+!*'(){},~:;=@#%&_\-]*)+
+
+# Months: January, Feb, 3, 03, 12, December
+MONTHNUM (?:0?[1-9]|1[0-2])
+MONTHNUM2 (?:0[1-9]|1[0-2])
+MONTHDAY (?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9]) 
+
+# Log formats
+SYSLOGBASE %{SYSLOGTIMESTAMP:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}:
+
+# Log Levels
+LOGLEVEL ([Aa]lert|ALERT|[Tt]race|TRACE|[Dd]ebug|DEBUG|[Nn]otice|NOTICE|[Ii]nfo|INFO|[Ww]arn?(?:ing)?|WARN?(?:ING)?|[Ee]rr?(?:or)?|ERR?(?:OR)?|[Cc
