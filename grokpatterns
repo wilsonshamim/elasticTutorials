@@ -7,6 +7,13 @@ use below grok pattern:
 %{TIMESTAMP_ISO8601:timestamp} \[user\:\*%{USERNAME:user}\] \[pipeline\:%{WORD:pipelinename}\/%{NOTSPACE:pipelineID}\] %{GREEDYDATA:thread}
 %{LOGLEVEL:log-level} %{GREEDYDATA:messages}
 
+apply the below filter in the logstash:
+filter {
+    grok {
+        match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} \[user\:\*%{USERNAME:user}\] \[pipeline\:%{WORD:pipelinename}\/%{NOTSPACE:pipelineID}\] %{GREEDYDATA:thread} %{LOGLEVEL:log-level} %{GREEDYDATA:messages}"}
+    }
+
+
 general grok pattern:
 USER: %{USERNAME}
 USERNAME: [a-zA-Z0-9._-]+
