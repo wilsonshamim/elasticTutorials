@@ -1,0 +1,26 @@
+pip install elasticsearch
+------------------------
+
+from elasticsearch import Elasticsearch
+
+from datetime import datetime
+import json
+es = Elasticsearch(
+    ['localhost'],
+    port=9200)
+
+createtime= datetime(2020, 5, 16, 8, 10, 10)
+starttime= datetime(2020, 5, 16, 8, 10, 10)
+endtime= datetime(2020, 5, 16, 9, 10, 10)
+
+job=[
+    {"JOB_ID":'1',"jobname":"a11","createtime":createtime},
+    {"job_id":2,"jobname":"a22","createtime":createtime},
+    {"job_id":3,"jobname":"a33","createtime":createtime}
+]
+for x in j:
+    print(x)
+    response1= es.index(index='index_e', doc_type ='_doc', body=x)
+    print ("\nclient.index response:", json.dumps(response1, indent=4))
+
+
