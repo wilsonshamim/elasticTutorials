@@ -1,0 +1,191 @@
+PUT /index1
+{
+  "settings" : {
+        "number_of_shards" : 1
+    },
+  
+    
+  "mappings": {
+      "properties": {
+        "COLOR": {
+          "type": "long"
+        },
+        "CREATE_TIME": {
+          "type": "long"
+        },
+        "CREATOR_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        
+        "DELETE_TIME": {
+          "type": "long"
+        },
+        "DESCRIPTION": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        
+        "ERROR_MESSAGE": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "ERROR_RECORD_COUNT": {
+          "type": "long"
+        },
+        
+        "FINISH_TIME": {
+          "type": "long"
+        },
+        "FORCE_STOP_TIMEOUT": {
+          "type": "long"
+        },
+        "ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "INPUT_RECORD_COUNT": {
+          "type": "long"
+        },
+        "JOB_DELETED": {
+          "type": "boolean"
+        },
+        "JOB_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "JOB_TEMPLATE": {
+          "type": "boolean"
+        },
+        "LAST_MODIFIED_TIME": {
+          "type": "long"
+        },
+        "LAST_MODIFIED_USER_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "LAST_REPORTED_METRIC_TIME": {
+          "type": "long"
+        },
+        "MAX_RETRIES_FAILED_JOB": {
+          "type": "long"
+        },
+        "MIGRATE_OFFSETS": {
+          "type": "boolean"
+        },
+        "NAME": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "NUM_INSTANCES": {
+          "type": "long"
+        },
+        "OUTPUT_RECORD_COUNT": {
+          "type": "long"
+        },
+        "PIPELINE_COMMIT_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "PIPELINE_COMMIT_LABEL": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "PIPELINE_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        
+        "RUN_COUNT": {
+          "type": "long"
+        },
+        "START_TIME": {
+          "type": "long"
+        },
+        "TIME_SERIES": {
+          "type": "boolean"
+        },
+        "UPGRADE_STATUS_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "USER_ID": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "create_time": {
+          "type": "date"
+        },
+        "delte_time": {
+          "type": "date"
+        },
+        "finish_time": {
+          "type": "date"
+        },
+		 "start_time": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
